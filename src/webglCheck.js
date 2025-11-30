@@ -1,5 +1,4 @@
-// webglCheck.js - Simple WebGL support detection + fallback
-export function initWebGLCheck() {
+export function WebGLCheck() {
   const hasWebGL = !!window.WebGLRenderingContext && 
     !!document.createElement('canvas').getContext('webgl');
 

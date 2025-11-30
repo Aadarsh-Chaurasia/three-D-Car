@@ -1,6 +1,9 @@
 import { createScene } from './SceneSetup.js';
 import { ScrollController } from './ScrollController.js';
+import { initWebGLCheck } from './webglCheck.js';
 
+// Check WebGL compatibility
+initWebGLCheck();
 
 const { scene, camera, renderer, frontLight, car } = createScene();
 const scroll = new ScrollController();

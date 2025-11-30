@@ -28,11 +28,18 @@ const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true;
 
 // Lights
-scene.add(new THREE.HemisphereLight(0xffffff, 0x444444, 1.2));
+const ambient = new THREE.AmbientLight(0x222233, 0.5);
+scene.add(ambient);
 
-const dirLight = new THREE.DirectionalLight(0xffffff, 1.5);
-dirLight.position.set(5, 10, 7);
-scene.add(dirLight);
+// back light (behind car, near camera)
+const backLight = new THREE.DirectionalLight(0xffffff, 1.2);
+backLight.position.set(0, 3, -6);
+scene.add(backLight);
+
+// front light (in front of car - starts dim)
+const frontLight = new THREE.DirectionalLight(0xfff4d0, 0.0);
+frontLight.position.set(0, 3, 6);
+scene.add(frontLight);
 
 // Load GLB
 const loader = new GLTFLoader();
@@ -91,3 +98,4 @@ function animate() {
 }
 
 animate();
+

@@ -5,6 +5,16 @@ import { ScrollController } from './ScrollController.js';
 const { scene, camera, renderer, frontLight, car } = createScene();
 const scroll = new ScrollController();
 
+// Quote overlay
+const quote = document.createElement('div');
+quote.textContent = '“Partnering with us should be a top-3 decision of your life.”';
+quote.style.cssText = `
+  position:fixed;bottom:10%;left:50%;transform:translateX(-50%);
+  color:#fff;font:300 clamp(1.8rem,4vw,3rem)/1.4 "Helvetica Neue",sans-serif;
+  text-align:center;opacity:0;pointer-events:none;
+`;
+document.body.appendChild(quote);
+
 
 // Resize
 window.addEventListener('resize', () => {
@@ -12,6 +22,7 @@ window.addEventListener('resize', () => {
   camera.updateProjectionMatrix();
   renderer.setSize(innerWidth, innerHeight);
 });
+
 
 // Animation loop
 const animate = () => {
@@ -32,6 +43,7 @@ const animate = () => {
     car.position.y = THREE.MathUtils.lerp(-0.5, 0, t);
     car.scale.setScalar(THREE.MathUtils.lerp(1.3, 1.45, t ** 1.4));
   }
+  quote.style.opacity = t > 0.65 ? (t - 0.65) * 3 : 0;
 
   renderer.render(scene, camera);
 };
